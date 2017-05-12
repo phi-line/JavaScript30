@@ -62,13 +62,40 @@
       background:black;
       position: absolute;
       top:50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.1s;
+      transition-timing-function: ease-in-out;
     }
 
   </style>
 
   <script>
+  const secHand = document.querySelector('.second-hand');
+  const minHand = document.querySelector('.min-hand');
+  const hrsHand = document.querySelector('.hour-hand');
 
+  function setDate(){
+    const now = new Date()
+    sec = now.getSeconds();
+    const min = now.getMinutes();
+    const hrs = now.getHours();
 
+    if (sec == 0){
+      secHand.style.transition = 'none'
+    } else secHand.style.transition = ''
+
+    const secDegs = ((sec / 60) * 360) + 90;
+    const minDegs = ((min / 60) * 360) + 90;
+    const hrsDegs = ((hrs / 60) * 360) + 90;
+
+    secHand.style.transform = `rotate(${secDegs}deg)`;
+    minHand.style.transform = `rotate(${minDegs}deg)`;
+    hrsHand.style.transform = `rotate(${hrsDegs}deg)`;
+    console.log(sec);
+  }
+
+  setInterval(setDate, 1000); //One second
   </script>
 </body>
 </html>
